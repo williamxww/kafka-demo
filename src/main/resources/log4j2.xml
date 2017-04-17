@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置更改,最迟60s生效 -->
+<configuration monitorInterval="60">
+    <Properties>
+        <Property name="filename">sql.log</Property>
+    </Properties>
+
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- %L 行号 %M 方法名 -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+
+        <File name="sqlFile" fileName="${filename}">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <filters>
+                <!-- 只打印SQL -->
+                <MarkerFilter marker="SQL" onMatch="ACCEPT" onMismatch="DENY"/>
+            </filters>
+        </File>
+    </appenders>
+
+
+    <loggers>
+        <logger name="com.bow.log4j2" additivity="false" level="trace">
+            <!-- 只有手机号15812345678会打印日志 -->
+            <ThreadContextMapFilter>
+                <KeyValuePair key="phoneNumber" value="15812345678"/>
+            </ThreadContextMapFilter>
+
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="sqlFile"/>
+        </logger>
+
+        <!-- 没有特别规定的包采用此配置 -->
+        <root level="debug">
+            <AppenderRef ref="Console"/>
+        </root>
+    </loggers>
+</configuration>
