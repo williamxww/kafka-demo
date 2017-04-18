@@ -24,18 +24,12 @@
 
 
     <loggers>
-        <logger name="com.bow.log4j2" additivity="false" level="trace">
-            <!-- 只有手机号15812345678会打印日志 -->
-            <ThreadContextMapFilter>
-                <KeyValuePair key="phoneNumber" value="15812345678"/>
-            </ThreadContextMapFilter>
-
+        <logger name="com.bow" additivity="false" level="trace">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="sqlFile"/>
         </logger>
 
         <!-- 没有特别规定的包采用此配置 -->
-        <root level="debug">
+        <root level="warn">
             <AppenderRef ref="Console"/>
         </root>
     </loggers>

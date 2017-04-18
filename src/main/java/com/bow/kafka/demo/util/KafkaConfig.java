@@ -1,4 +1,4 @@
-package com.bow.kafka.cdel.util;
+package com.bow.kafka.demo.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ public class KafkaConfig {
     public static Properties getProperties(String configFile) throws IOException {
         Properties properties;
         try {
-            InputStream input = KafkaConfig.class.getResourceAsStream(configFile);
+            InputStream input = KafkaConfig.class.getClassLoader().getResourceAsStream(configFile);
             properties = new Properties();
             properties.load(input);
             input.close();
