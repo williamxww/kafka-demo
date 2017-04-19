@@ -10,6 +10,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import scala.collection.immutable.Stream;
 
 /**
  * 同一个主题，不同组的两个消费者各自消费不受影响，同组内的消费者竞争消费一条。<br/>
@@ -20,20 +21,34 @@ public class ConsumerDemo {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerDemo.class);
 
-	public static void main(String[] args) throws IOException {
-		Properties properties = KafkaConfig.getProperties("kafka/consumer.properties");
-		KafkaConsumer<String, String> consumer = new KafkaConsumer(properties);
-		// 消息处理
-		consumer.subscribe(Arrays.asList("mytopic"));
-		// offset 为记录在分区的唯一标识
-		while (true) {
-			ConsumerRecords<String, String> records = consumer.poll(100);
-			for (ConsumerRecord<String, String> record : records) {
-				String msg = String.format("partition=%d, offset=%d, key=%s, value=%s", record.partition(),
-						record.offset(), record.key(), record.value());
-				LOGGER.info(msg);
-			}
+	private KafkaConsumer<String, String> consumer;
+
+	public ConsumerDemo(String group) {
+		Properties properties = null;
+		try {
+			properties = KafkaConfig.getProperties("kafka/consumer.properties");
+			properties.put("group.id", group);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		consumer = new KafkaConsumer(properties);
+	}
+
+	public void subscribe(String topic) {
+		// 消息处理
+		consumer.subscribe(Arrays.asList(topic));
+	}
+
+	public ConsumerRecords<String, String> poll(long timeout) {
+		ConsumerRecords<String, String> records = consumer.poll(timeout);
+		//
+		// for (ConsumerRecord<String, String> record : records) {
+		// String msg = String.format("partition=%d, offset=%d, key=%s,
+		// value=%s", record.partition(),
+		// record.offset(), record.key(), record.value());
+		// LOGGER.info(msg);
+		// }
+		return records;
 	}
 
 }

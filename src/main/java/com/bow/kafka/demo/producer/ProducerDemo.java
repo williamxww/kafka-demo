@@ -25,7 +25,7 @@ public class ProducerDemo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		producer = new KafkaProducer<>(properties);
+		producer = new KafkaProducer(properties);
 	}
 
 	public void send(String topic, String key, String value) {
@@ -44,6 +44,11 @@ public class ProducerDemo {
 			}
 		});
 		producer.flush();
+	}
+
+	public void send(String topic, String key, String value, Callback callback) {
+		producer.send(new ProducerRecord<String, String>(topic, key, value), callback);
+//		producer.flush();
 	}
 
 	public void close() {
