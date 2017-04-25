@@ -22,8 +22,8 @@ public class Producer {
 		final String topic = "PRICE";
 		final String group = "group-a";
 		final int threadCount = 1;
-		final int messageSize = 200;
-		final int numPerThread = 1000_0000;
+		final int messageSize = 1000;
+		final int numPerThread = 100_0000;
 
 		LOGGER.info("topic {} threadCount {} messageSize {} ", topic, threadCount, messageSize);
 
