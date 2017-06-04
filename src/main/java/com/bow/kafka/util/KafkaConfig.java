@@ -1,4 +1,4 @@
-package com.bow.kafka.demo.util;
+package com.bow.kafka.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

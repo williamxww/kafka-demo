@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.bow.kafka.demo.producer.ProducerDemo;
+import com.bow.kafka.util.MqProducer;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
@@ -74,7 +75,7 @@ public class Producer {
 			}
 		}, 5000, 5000);
 
-		final ProducerDemo producer = new ProducerDemo();
+		final MqProducer producer = new MqProducer();
 
 		for (int i = 0; i < threadCount; i++) {
 			sendThreadPool.execute(new Runnable() {

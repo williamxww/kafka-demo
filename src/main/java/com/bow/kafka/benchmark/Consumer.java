@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.bow.kafka.demo.consumer.ConsumerDemo;
+import com.bow.kafka.util.MqConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
@@ -66,7 +67,7 @@ public class Consumer {
 			}
 		}, 5000, 5000);
 
-		ConsumerDemo consumer = new ConsumerDemo(group);
+		MqConsumer consumer = new MqConsumer(group);
 		consumer.subscribe(topic);
 		System.out.printf("Consumer Started.%n");
 
