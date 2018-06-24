@@ -2,7 +2,7 @@
 <!-- 配置更改,最迟60s生效 -->
 <configuration monitorInterval="60">
     <Properties>
-        <Property name="filename">sql.log</Property>
+        <Property name="filename">demo.log</Property>
     </Properties>
 
     <appenders>

@@ -17,9 +17,10 @@ public class Consumer {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Consumer.class);
 
+	public static String topic = Producer.topic;
+
 	public static void main(String[] args) throws Exception {
 
-		String topic = "PRICE";
 		String group = "group-a";
 
 		LOGGER.info("topic {}, group {} ", topic, group);

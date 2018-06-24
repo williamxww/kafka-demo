@@ -18,12 +18,12 @@ import org.slf4j.LoggerFactory;
 public class Producer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Producer.class);
 
+	public static String topic = "PRICE";
 	public static void main(String[] args) throws Exception {
 
-		final String topic = "PRICE";
-		final String group = "group-a";
+
 		final int threadCount = 1;
-		final int messageSize = 1000;
+		final int messageSize = 200;
 		final int numPerThread = 100_0000;
 
 		LOGGER.info("topic {} threadCount {} messageSize {} ", topic, threadCount, messageSize);
